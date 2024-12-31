@@ -14,7 +14,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
     @Override
-    public User userRegister(String username, String password, String email, String phone, UserType userType, boolean partnerMember) {
+    public User userRegister(String username, String password, String email, String phone, UserType userType, Boolean partnerMember) {
         if (userRepository.existsByUsername(username)) {
             throw new IllegalArgumentException("이미 존재하는 사용자 이름입니다.");
         }

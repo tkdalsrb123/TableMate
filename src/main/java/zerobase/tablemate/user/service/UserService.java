@@ -8,6 +8,6 @@ public interface UserService {
     /**
      * 회원 등록
      */
-    User userRegister(String username, String password, String email, String phone, UserType userType, boolean partnerMember);
+    User userRegister(String username, String password, String email, String phone, UserType userType, Boolean partnerMember);
 
 }

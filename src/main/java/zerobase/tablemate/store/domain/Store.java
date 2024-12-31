@@ -1,11 +1,14 @@
-package zerobase.tablemate.user.domain;
+package zerobase.tablemate.store.domain;
 
-import jakarta.persistence.*;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import zerobase.tablemate.user.type.UserType;
 
 import java.time.LocalDateTime;
 
@@ -13,26 +16,22 @@ import java.time.LocalDateTime;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name="users")
 @Builder
+@Entity(name="store")
 @EntityListeners(AuditingEntityListener.class)
-public class User {
+public class Store {
     @Id
     @GeneratedValue
     private Long id;
-    private String username;
-    private String password;
-    private String email;
-    private String phone;
 
-    @Enumerated(EnumType.STRING)
-    private UserType userType;
+    private String userName;
 
-    private boolean partnerMember;
+    private String storeName;
+    private String storeAddress;
+    private String storePhone;
 
     @CreatedDate
     private LocalDateTime registeredAt;
     @LastModifiedDate
     private LocalDateTime updatedAt;
-
 }
