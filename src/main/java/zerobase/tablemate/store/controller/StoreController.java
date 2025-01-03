@@ -16,7 +16,6 @@ public class StoreController {
 
     @PostMapping("/store/register")
     public StoreDto.Response storeRegister(@RequestBody StoreDto.Request request, @RequestParam String userName) {
-
         return StoreDto.Response.of(
                 storeService.storeRegister(
                         request.getStoreName(),
