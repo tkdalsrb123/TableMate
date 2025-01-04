@@ -20,7 +20,7 @@ public class ReservationController {
     public ReservationRegisterDto.Response reservationRegister(@RequestBody ReservationRegisterDto.Request request) {
         String userName = request.getUserName();
         String storeName = request.getStoreName();
-        LocalDateTime reservationDateTime = LocalDateTime.parse(request.getReservationDateTime(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        LocalDateTime reservationDateTime = LocalDateTime.parse(request.getReservationDateTime(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
 
         return ReservationRegisterDto.Response.of(reservationService.reservationRegister(userName, storeName, reservationDateTime));
     }

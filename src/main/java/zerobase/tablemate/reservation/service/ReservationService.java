@@ -6,4 +6,6 @@ import java.time.LocalDateTime;
 
 public interface ReservationService {
     Reservation reservationRegister(String userName, String storeName, LocalDateTime reservationDateTime);
+
+    void canReserve(String userName, String storeName, LocalDateTime reservationDateTime);
 }

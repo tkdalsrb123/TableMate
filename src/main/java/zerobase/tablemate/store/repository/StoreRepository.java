@@ -11,4 +11,6 @@ public interface StoreRepository extends JpaRepository<Store, Long> {
     Optional<Store> deleteStoreByStoreName(String storeName);
 
     Optional<Store> findStoreByStoreName(String preStoreName);
+
+    Optional<Store> findByUserName(String username);
 }

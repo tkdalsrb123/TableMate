@@ -1,13 +1,11 @@
 package zerobase.tablemate.reservation.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.EntityListeners;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import zerobase.tablemate.reservation.type.VisitStatus;
 
 import java.time.LocalDateTime;
 
@@ -26,6 +24,9 @@ public class Reservation {
     private String userName;
     private String storeName;
     private LocalDateTime reservationDateTime;
+
+    @Enumerated(EnumType.STRING)
+    private VisitStatus visitStatus;
 
     @CreatedDate
     private LocalDateTime createdDate;
