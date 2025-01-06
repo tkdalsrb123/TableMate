@@ -1,12 +1,11 @@
 package zerobase.tablemate.review.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import zerobase.tablemate.review.domain.Review;
+import zerobase.tablemate.review.dto.ReviewDeleteDto;
 import zerobase.tablemate.review.dto.ReviewDto;
+import zerobase.tablemate.review.dto.ReviewModifyDto;
 import zerobase.tablemate.review.service.ReviewService;
 
 @RestController
@@ -24,5 +23,13 @@ public class ReviewController {
                 request.getContent()));
     }
 
+    @PutMapping("/review/modify")
+    public String reviewModify(@RequestBody ReviewModifyDto request) {
+        return reviewService.reviewModify(request.getUserName(), request.getStoreName(), request.getTitle(), request.getContent());
+    }
 
+    @DeleteMapping("/review/delete")
+    public String reviewDelete(@RequestBody ReviewDeleteDto request) {
+        return reviewService.reviewDelete(request.getUserName(), request.getStoreName(), request.getReviewId());
+    }
 }
