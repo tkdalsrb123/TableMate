@@ -9,8 +9,8 @@ public interface ReviewService {
 
     void canReview(String userName, String storeName);
 
-    String reviewModify(String userName, String storeName, String title, String content);
+    Review reviewModify(String userName, String storeName, String title, String content);
 
-    String reviewDelete(String userName, String storeName, Long reviewId);
+    Review reviewDelete(String userName, String storeName, Long reviewId);
 
 }

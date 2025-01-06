@@ -1,6 +1,7 @@
 package zerobase.tablemate.store.dto;
 
 import lombok.*;
+import zerobase.tablemate.store.domain.Store;
 
 @Getter
 @Setter
@@ -14,5 +15,12 @@ public class StoreUpdateDto {
     private String updatePhone;
 
     private String userName;
-    private String password;
+
+    public static StoreUpdateDto from(Store store) {
+        return StoreUpdateDto.builder()
+                .updateName(store.getStoreName())
+                .updateAddress(store.getStoreAddress())
+                .updatePhone(store.getStorePhone())
+                .build();
+    }
 }

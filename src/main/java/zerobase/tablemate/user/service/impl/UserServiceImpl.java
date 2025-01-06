@@ -2,10 +2,13 @@ package zerobase.tablemate.user.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import zerobase.tablemate.aop.exception.ErrorResponseException;
 import zerobase.tablemate.user.domain.User;
 import zerobase.tablemate.user.repository.UserRepository;
 import zerobase.tablemate.user.service.UserService;
 import zerobase.tablemate.user.type.UserType;
+
+import static zerobase.tablemate.aop.exception.ErrorCode.USER_ALREADY_EXIST;
 
 @Service
 @RequiredArgsConstructor
@@ -15,13 +18,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User userRegister(String username, String password, String email, String phone, UserType userType, Boolean partnerMember) {
-        if (userRepository.existsByUsername(username)) {
-            throw new IllegalArgumentException("이미 존재하는 사용자 이름입니다.");
-        }
-        if (userRepository.existsByEmail(email)) {
-            throw new IllegalArgumentException("이미 사용 중인 이메일입니다.");
-        }
-
         return userRepository.save(User.builder()
                 .username(username)
                 .password(password)
@@ -30,5 +26,12 @@ public class UserServiceImpl implements UserService {
                 .userType(userType)
                 .partnerMember(partnerMember)
                 .build());
+    }
+
+    @Override
+    public void canRegister(String userName) {
+        if (userRepository.existsByUsername(userName)) {
+            throw new ErrorResponseException(USER_ALREADY_EXIST);
+        }
     }
 }

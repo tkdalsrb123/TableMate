@@ -27,22 +27,21 @@ public class StoreController {
     }
 
     @DeleteMapping("/store/delete")
-    public String deleteStore(@RequestBody StoreDeleteDto request) {
-        return storeService.storeDelete(
+    public StoreDeleteDto deleteStore(@RequestBody StoreDeleteDto request) {
+        return StoreDeleteDto.from(storeService.storeDelete(
                 request.getStoreName(),
-                request.getUserName(),
-                request.getPassword());
+                request.getUserName())
+        );
     }
 
     @PutMapping("/store/update")
-    public String updateStore(@RequestBody StoreUpdateDto request) {
-        return storeService.storeUpdate(
+    public StoreUpdateDto updateStore(@RequestBody StoreUpdateDto request) {
+        return StoreUpdateDto.from(storeService.storeUpdate(
                 request.getStoreName(),
                 request.getUpdateName(),
                 request.getUpdateAddress(),
                 request.getUpdatePhone(),
-                request.getUserName(),
-                request.getPassword()
-        );
+                request.getUserName()
+        ));
     }
 }

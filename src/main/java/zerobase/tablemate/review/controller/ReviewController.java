@@ -24,12 +24,19 @@ public class ReviewController {
     }
 
     @PutMapping("/review/modify")
-    public String reviewModify(@RequestBody ReviewModifyDto request) {
-        return reviewService.reviewModify(request.getUserName(), request.getStoreName(), request.getTitle(), request.getContent());
+    public ReviewModifyDto reviewModify(@RequestBody ReviewModifyDto request) {
+        return ReviewModifyDto.from(reviewService.reviewModify(
+                request.getUserName(),
+                request.getStoreName(),
+                request.getTitle(),
+                request.getContent()));
     }
 
     @DeleteMapping("/review/delete")
-    public String reviewDelete(@RequestBody ReviewDeleteDto request) {
-        return reviewService.reviewDelete(request.getUserName(), request.getStoreName(), request.getReviewId());
+    public ReviewDeleteDto reviewDelete(@RequestBody ReviewDeleteDto request) {
+        return ReviewDeleteDto.from(reviewService.reviewDelete(
+                request.getUserName(),
+                request.getStoreName(),
+                request.getReviewId()));
     }
 }

@@ -2,6 +2,8 @@ package zerobase.tablemate.reservation.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import zerobase.tablemate.aop.exception.ErrorCode;
+import zerobase.tablemate.aop.exception.ErrorResponseException;
 import zerobase.tablemate.reservation.domain.Reservation;
 import zerobase.tablemate.reservation.repository.ReservationRepository;
 import zerobase.tablemate.reservation.service.ReservationService;
@@ -12,6 +14,8 @@ import zerobase.tablemate.user.domain.User;
 import zerobase.tablemate.user.repository.UserRepository;
 
 import java.time.LocalDateTime;
+
+import static zerobase.tablemate.aop.exception.ErrorCode.*;
 
 @Service
 @RequiredArgsConstructor
@@ -34,11 +38,16 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Override
     public void canReserve(String userName, String storeName, LocalDateTime reservationDateTime) {
-        User user = userRepository.findByUsername(userName).orElseThrow(() -> new IllegalArgumentException("사용자 정보가 일치하지 않습니다."));
-        Store store = storeRepository.findStoreByStoreName(storeName).orElseThrow(() -> new IllegalArgumentException("매장이 존재하지 않습니다."));
-        boolean isReserved = reservationRepository.existsReservationByReservationDateTime(reservationDateTime);
-        if (isReserved) {
-            throw new IllegalArgumentException("해당 시간은 예약이 불가능합니다.");
+        if (!userRepository.existsByUsername(userName)) {
+            throw new ErrorResponseException(USER_NOT_FOUND);
         }
+        if (!storeRepository.existsByStoreName(storeName)) {
+            throw new ErrorResponseException(STORE_NOT_FOUND);
+        }
+
+        if (reservationRepository.existsReservationByReservationDateTime(reservationDateTime)) {
+            throw new ErrorResponseException(RESERVATION_NOT_AVAILABLE);
+        }
+
     }
 }

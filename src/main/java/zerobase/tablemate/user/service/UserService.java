@@ -10,4 +10,5 @@ public interface UserService {
      */
     User userRegister(String username, String password, String email, String phone, UserType userType, Boolean partnerMember);
 
+    void canRegister(String userName);
 }
