@@ -11,6 +11,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 public class SecurityConfig {
 
+    // 로그인 관리자 권한 설정
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf((csrf) -> csrf.disable())
@@ -42,6 +43,7 @@ public class SecurityConfig {
         return http.build();
     }
 
+    // 비밀번호 인코딩
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();

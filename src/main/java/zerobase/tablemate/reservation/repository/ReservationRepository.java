@@ -13,5 +13,4 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
 
     Optional<Reservation> findReservationByUserNameAndStoreName(String username, String storeName);
 
-    boolean existsReservationByUserNameAndStoreName(String userName, String storeName);
 }

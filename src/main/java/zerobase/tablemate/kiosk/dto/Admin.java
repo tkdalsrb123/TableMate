@@ -4,6 +4,7 @@ import lombok.*;
 import zerobase.tablemate.store.domain.Store;
 
 
+// 관리자 정보 DTO
 public class Admin {
 
     @Getter

@@ -4,6 +4,7 @@ package zerobase.tablemate.review.dto;
 import lombok.*;
 import zerobase.tablemate.review.domain.Review;
 
+// 리뷰 등록 DTO
 public class ReviewDto {
 
     @Getter

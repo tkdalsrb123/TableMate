@@ -14,6 +14,7 @@ public class UserController {
 
     private final UserServiceImpl userService;
 
+    // 회원 등록
     @PostMapping("user/register")
     public UserDto.Response registerUser(@RequestBody @Valid UserDto.Request request) {
         return UserDto.Response.of(userService.userRegister(

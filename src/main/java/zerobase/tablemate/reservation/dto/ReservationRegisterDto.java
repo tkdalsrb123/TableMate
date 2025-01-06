@@ -5,8 +5,8 @@ import zerobase.tablemate.reservation.domain.Reservation;
 
 import java.time.LocalDateTime;
 
+// 예약 등록 DTO
 public class ReservationRegisterDto {
-
 
     @Getter
     @Setter

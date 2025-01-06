@@ -13,16 +13,23 @@ import java.time.LocalDateTime;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name="users")
+@Entity
+@Table(name = "users", uniqueConstraints =
+    @UniqueConstraint(columnNames = {"username", "password", "email", "phone"})
+)
 @Builder
 @EntityListeners(AuditingEntityListener.class)
+// 회원 객체
 public class User {
     @Id
     @GeneratedValue
     private Long id;
+    @Column
     private String username;
     private String password;
+    @Column
     private String email;
+    @Column
     private String phone;
 
     @Enumerated(EnumType.STRING)

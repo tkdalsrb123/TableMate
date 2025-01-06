@@ -16,6 +16,7 @@ public class ReservationController {
 
     private final ReservationService reservationService;
 
+    // 예약 등록하기
     @PostMapping("/reservation/register")
     public ReservationRegisterDto.Response reservationRegister(@RequestBody ReservationRegisterDto.Request request) {
         String userName = request.getUserName();

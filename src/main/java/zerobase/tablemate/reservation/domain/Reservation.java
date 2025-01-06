@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
 @Builder
 @Entity(name="reservation")
 @EntityListeners(AuditingEntityListener.class)
+// 예약 객체
 public class Reservation {
     @Id
     @GeneratedValue

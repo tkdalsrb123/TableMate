@@ -20,6 +20,7 @@ import java.time.LocalDateTime;
 @Builder
 @Entity(name="review")
 @EntityListeners(AuditingEntityListener.class)
+// 리뷰 객체
 public class Review {
     @Id
     @GeneratedValue

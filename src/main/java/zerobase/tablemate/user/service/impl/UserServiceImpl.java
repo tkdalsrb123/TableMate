@@ -20,6 +20,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User userRegister(String username, String password, String email, String phone, UserType userType, Boolean partnerMember) {
+        canRegister(username);
         String passwordHash = passwordEncoder.encode(password);
         return userRepository.save(User.builder()
                 .username(username)

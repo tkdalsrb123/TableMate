@@ -55,6 +55,7 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
+    @Transactional
     public Review reviewModify(String userName, String storeName, String title, String content) {
         canReview(userName, storeName);
         Review review = reviewRepository.findByUserNameAndStoreName(userName, storeName)

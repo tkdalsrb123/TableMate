@@ -14,6 +14,7 @@ public class StoreController {
 
     private final StoreService storeService;
 
+    // 매장 등록
     @PostMapping("/store/register")
     public StoreDto.Response storeRegister(@RequestBody StoreDto.Request request, @RequestParam String userName) {
         return StoreDto.Response.of(
@@ -26,6 +27,7 @@ public class StoreController {
         );
     }
 
+    // 매장 삭제
     @DeleteMapping("/store/delete")
     public StoreDeleteDto deleteStore(@RequestBody StoreDeleteDto request) {
         return StoreDeleteDto.from(storeService.storeDelete(
@@ -34,6 +36,7 @@ public class StoreController {
         );
     }
 
+    // 매장 수정
     @PutMapping("/store/update")
     public StoreUpdateDto updateStore(@RequestBody StoreUpdateDto request) {
         return StoreUpdateDto.from(storeService.storeUpdate(

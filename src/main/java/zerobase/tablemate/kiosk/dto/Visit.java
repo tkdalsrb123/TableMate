@@ -9,6 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+// 방문자 정보 DTO
 public class Visit {
     private String visitorName;
     private String visitorPassword;

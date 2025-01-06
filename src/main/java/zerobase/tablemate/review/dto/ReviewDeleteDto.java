@@ -12,6 +12,7 @@ import zerobase.tablemate.review.domain.Review;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+// 리뷰 삭제 DTO
 public class ReviewDeleteDto {
     private String userName;
     private String storeName;

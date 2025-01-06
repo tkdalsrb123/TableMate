@@ -2,6 +2,8 @@ package zerobase.tablemate.kiosk.service;
 
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import zerobase.tablemate.aop.exception.ErrorResponseException;
@@ -22,22 +24,28 @@ public class KioskService {
     private final UserRepository userRepository;
     private final StoreRepository storeRepository;
     private final ReservationRepository reservationRepository;
+    private final PasswordEncoder passwordEncoder;
 
+    // 관리자 등록
     public Store registerManager(String adminName, String adminPassword) {
-        User admin = userRepository.findByUsernameAndPassword(adminName, adminPassword).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 사용자입니다."));
+        adminPassword = passwordEncoder.encode(adminPassword);
+        User admin = userRepository.findByUsernameAndPassword(adminName, adminPassword).orElseThrow(() -> new ErrorResponseException(USER_NOT_FOUND));
         isAdmin(admin);
-        Store store = storeRepository.findByUserName(admin.getUsername()).orElseThrow(() -> new IllegalArgumentException("등록된 매장이 없습니다."));;
+        Store store = storeRepository.findByUserName(admin.getUsername()).orElseThrow(() -> new ErrorResponseException(STORE_NOT_FOUND));;
         return store;
     }
 
+    // 관리자 권한 확인
     public void isAdmin(User user) {
         if (user.getUserType() != UserType.MANAGER && !user.isPartnerMember()) {
             throw new ErrorResponseException(STORE_ACCESS_DENIED);
         }
     }
 
+    // 방문자 체크
     @Transactional
     public String visitCheck(String visitorName, String visitorPassword, String storeName) {
+        visitorPassword = passwordEncoder.encode(visitorPassword);
         User visitor = userRepository.findByUsernameAndPassword(visitorName, visitorPassword).orElseThrow(() -> new ErrorResponseException(USER_NOT_FOUND));
 
         Reservation reservation = reservationRepository.findReservationByUserNameAndStoreName(visitor.getUsername(), storeName).orElseThrow(() -> new ErrorResponseException(RESERVATION_NOT_FOUND));

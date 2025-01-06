@@ -9,6 +9,7 @@ import zerobase.tablemate.review.domain.Review;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+// 리뷰 수정 DTO
 public class ReviewModifyDto {
     private String userName;
     private String storeName;
