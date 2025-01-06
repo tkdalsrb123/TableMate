@@ -1,6 +1,7 @@
 package zerobase.tablemate.user.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import zerobase.tablemate.aop.exception.ErrorResponseException;
 import zerobase.tablemate.user.domain.User;
@@ -15,12 +16,14 @@ import static zerobase.tablemate.aop.exception.ErrorCode.USER_ALREADY_EXIST;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public User userRegister(String username, String password, String email, String phone, UserType userType, Boolean partnerMember) {
+        String passwordHash = passwordEncoder.encode(password);
         return userRepository.save(User.builder()
                 .username(username)
-                .password(password)
+                .password(passwordHash)
                 .email(email)
                 .phone(phone)
                 .userType(userType)
