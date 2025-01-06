@@ -62,3 +62,8 @@
 
 ## **테스트 코드 작성**
 - [ ] 기능별 단위 테스트 및 통합 테스트 추가 예정
+
+
+# ERD
+![tableMate_ERD](https://github.com/user-attachments/assets/30d368f9-14d6-46a0-a7e2-b20d0acf7066)
+
